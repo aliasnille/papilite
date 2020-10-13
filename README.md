@@ -8,3 +8,5 @@
 
 * [English](https://github.com/aliasnille/papilite/blob/master/README.en-GB.md)
 * [Swedish](https://github.com/aliasnille/papilite/blob/master/README.sv-SE.md)
+
+[![Vimeo | PAP/API Lite - Alla Sveriges postnummer & postorter](https://papilite.se/papilite-promo-thumb.jpg)](https://vimeo.com/467677806)
