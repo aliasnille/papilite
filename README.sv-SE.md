@@ -3,7 +3,7 @@
 # PAP/API Lite
 
 [**PAP/API Lite**](https://papilite.se/) eller förkortat till *PAPILITE* är ett öppet REST API med alla Sveriges postnummer och postorter. Genom att använda detta API får användaren fri tillgång till aktuella uppgifter för postnummer och postorter. Det finns över 16.000 postnummer i Sverige. Antalet postnummer förändras ständigt. Postnummer tillkommer eller faller bort.
-PAPILITE innehåller inte bara uppgifter om postnummer och postorter utan även om kommuner, län samt gps-koordinater för samtliga postorter.
+PAPILITE innehåller inte bara uppgifter om postnummer och postorter utan även om kommuner, län samt gps-koordinater för samtliga postnummer. Dessutom gator för de användare som väljer att uppgradera genom *"engångsdonation"*.
 Detta är ett komplett API som fyller sitt syfte och kan användas inom många användningsområden. PAPILITE underlättar och hjälper i processer där aktuella och riktiga uppgifter är avgörande.
 
 ## Bakgrund
@@ -14,7 +14,7 @@ Bakom PAPILITE precis som PAP/API ligger full stack-utvecklaren [Nille](https://
 
 ## Komma igång
 
-PAPILITE är öppet och fritt att använda. Det krävs dock [registrering](https://papilite.se/#registrera) för att använda och max 500 anrop per dag är tillåtet. Det är dock möjligt att genom [donation](https://papilite.se/#priser) få upp till 5.000 eller 10.000 anrop per dag och fler möjligheter och funktioner. Det handlar endast om engångsdonation. Det ska dock tilläggas att gränsen för gratis använding av PAPILITE inte är skrivit i sten. Det är möjligt att få gränsen förhöjd med en tillräckligt god motivering eller dylikt.
+PAPILITE är öppet och fritt att använda. Det krävs dock [registrering](https://papilite.se/#registrera) för att använda och då är max 500 anrop per dag är tillåtet. Det är möjligt att genom [donation](https://papilite.se/#priser) få upp till 5.000 eller 10.000 anrop per dag och fler möjligheter och funktioner. Det handlar endast om engångsdonation. Efter *"engångsdonation"* är du för alltid uppgraderad till valt paket. Ingen månads- eller årskostnad tillkommer.
 
 ## Användning
 
@@ -50,7 +50,7 @@ Hämta data baserat på postort utförs enligt nedan.
 
 ### Svar
 
-Datan som returneras vid ett korrekt anrop innehåller följande **postnummer** (*postal code*), **postort** (*city*), **latitud** (*latitude*), **longitud** (*longitude*), **kommunkod** (*county code*), **kommun** (*county*), **länskod** (*state code*), **län** (*state*), **notering** (*notes*) och **uppdaterad** (*updated*).
+Datan som returneras vid ett korrekt anrop innehåller följande **postnummer** (*postal code*), **postort** (*city*), **latitud** (*latitude*), **longitud** (*longitude*), **kommunkod** (*county code*), **kommun** (*county*), **länskod** (*state code*), **län** (*state*), **gator** (*streets*), **notering** (*notes*) och **uppdaterad** (*updated*).
 
 #### Svarskoder
 
@@ -64,6 +64,16 @@ Anrop kan ge följande svarskoder som är standard HTTP-statuskoder.
 | 403 — FORBIDDEN    | Gräns nådd för anrop per dag eller spärrad API-nyckel |
 | 404 — NOT FOUND    | Korrekt anrop men utan svar                           |
 
+#### Daglig anropskvot
+
+Följande special HTTP-headers kan användas för överblick av daglig anropskvot.
+
+| HTTP-headers       | Beskrivning                                           |
+| ------------------ | ----------------------------------------------------- |
+| UserDailyLimit     | Max antal anrop per dag                               |
+| UserDailyQuota     | Använda anrop för dagen                               |
+| UserDailyRemaining | Kvarvarande anrop för dagen                           |
+
 #### Exempel på svar
 
 Svar på anrop för postnummer innehåller endast en post medan svar på anrop för postort kan innehålla upp till 100 poster.
@@ -71,117 +81,82 @@ Svar på anrop för postnummer innehåller endast en post medan svar på anrop f
 **JSON**
 
 ```json
-{"api":{"name":"PAP/API Lite","url":"https://papilite.se","version":"X.X","updated":"ÅÅÅÅ-MM-DD TT:MM:SS","encoding":"UTF-8"},"results":[{"postal_code":"10004","city":"Stockholm","latitude":"59.3293235","longitude":"18.0685808","county_code":"0180","county":"Stockholm","state_code":"01","state":"Stockholm","note":"","updated":"ÅÅÅÅ-MM-DD TT:MM:SS"},{"postal_code":"10005","city":"Stockholm","latitude":"59.3293235","longitude":"18.0685808","county_code":"0180","county":"Stockholm","state_code":"01","state":"Stockholm","note":"","updated":"ÅÅÅÅ-MM-DD TT:MM:SS"},{"postal_code":"10012","city":"Stockholm","latitude":"59.3293235","longitude":"18.0685808","county_code":"0180","county":"Stockholm","state_code":"01","state":"Stockholm","note":"","updated":"ÅÅÅÅ-MM-DD TT:MM:SS"} [...]
+{"api":{"name":"PAP/API Lite","url":"https://papilite.se","version":"X.X","updated":"ÅÅÅÅ-MM-DD TT:MM:SS","encoding":"UTF-8"},"results":[{"postal_code":"10004","city":"Stockholm","latitude":"59.3293235","longitude":"18.0685808","county_code":"0180","county":"Stockholm","state_code":"01","state":"Stockholm","streets":["Test"],"note":"","updated":"ÅÅÅÅ-MM-DD TT:MM:SS"},{"postal_code":"10005","city":"Stockholm","latitude":"59.3293235","longitude":"18.0685808","county_code":"0180","county":"Stockholm","state_code":"01","state":"Stockholm","streets":["Leveranspunkt"]"note":"","updated":"ÅÅÅÅ-MM-DD TT:MM:SS"},{"postal_code":"10012","city":"Stockholm","latitude":"59.3293235","longitude":"18.0685808","county_code":"0180","county":"Stockholm","state_code":"01","state":"Stockholm","streets":["Riksdagen"]"note":"","updated":"ÅÅÅÅ-MM-DD TT:MM:SS"} [...]
 ```
 
 **XML**
 
 ```xml
 <results>
-
 	<api>
-
 		<name>PAP/API Lite</name>
-
 		<url>https://papilite.se</url>
-
 		<version>X.X</version>
-
 		<updated>ÅÅÅÅ-MM-DD TT:MM:SS</updated>
-
 		<encoding>UTF-8</encoding>
-
 	</api>
-
 	<result>
-
 		<postal_code>10004</postal_code>
-
 		<city>Stockholm</city>
-
 		<latitude>59.3293235</latitude>    
-
 		<longitude>18.0685808</longitude>	
-
 		<county_code>0180</county_code>
-
 		<county>Stockholm</county>
-
 		<state_code>01</state_code>
-
 		<state>Stockholm</state>
-
+    	<streets>
+      		<street>Test</street>
+		</streets>
 		<note></note>
-
 		<updated>ÅÅÅÅ-MM-DD TT:MM:SS</updated>
-
 	</result>
-
 	<result>
-
 		<postal_code>10005</postal_code>
-
 		<city>Stockholm</city>
-
 		<latitude>59.3293235</latitude>
-
 		<longitude>18.0685808</longitude>
-
 		<county_code>0180</county_code>
-
 		<county>Stockholm</county>
-
 		<state_code>01</state_code>
-
 		<state>Stockholm</state>
-
+    	<streets>
+      		<street>Leveranspunkt</street>
+		</streets>		
 		<note></note>
-
 		<updated>ÅÅÅÅ-MM-DD TT:MM:SS</updated>
-
 	</result>
-
 	<result>
-
 		<postal_code>10012</postal_code>
-
 		<city>Stockholm</city>
-
 		<latitude>59.3293235</latitude>
-
 		<longitude>18.0685808</longitude>
-
 		<county_code>0180</county_code>
-
 		<county>Stockholm</county>
-
 		<state_code>01</state_code>
-
 		<state>Stockholm</state>
-
+    	<streets>
+      		<street>Riksdagen</street>
+		</streets>
 		<note></note>
-
 		<updated>ÅÅÅÅ-MM-DD TT:MM:SS</updated>
-
 	</result>
-
 [...]
 ```
 
 **CSV**
 
 ```
-postal_code;city;latitude;longitude;county_code;county;state_code;state;note;updated
-10004;Stockholm;59.3293235;18.0685808;0180;Stockholm;01;Stockholm;;ÅÅÅÅ-MM-DD TT:MM:SS
-10005;Stockholm;59.3293235;18.0685808;0180;Stockholm;01;Stockholm;;ÅÅÅÅ-MM-DD TT:MM:SS
-10012;Stockholm;59.3293235;18.0685808;0180;Stockholm;01;Stockholm;;ÅÅÅÅ-MM-DD TT:MM:SS
+postal_code;city;latitude;longitude;county_code;county;state_code;state;streets;note;updated
+10004;Stockholm;59.3293235;18.0685808;0180;Stockholm;01;Stockholm;Test;;ÅÅÅÅ-MM-DD TT:MM:SS
+10005;Stockholm;59.3293235;18.0685808;0180;Stockholm;01;Stockholm;Leveranpunkt;;ÅÅÅÅ-MM-DD TT:MM:SS
+10012;Stockholm;59.3293235;18.0685808;0180;Stockholm;01;Stockholm;Riksdagen;;ÅÅÅÅ-MM-DD TT:MM:SS
 [...]
 \### PAP/API Lite | https:///docs | v X.X | ÅÅÅÅ-MM-DD TT:MM:SS | UTF-8 ###
 ```
 
 #### För donatorer
 
-Alla som gör engångsdonation får fler funktioner, bland annat anrop med ofullständiga postnummer, anrop med mindre antal bokstäver för postorter och hämta data baserat på latitud och longitud. Information gällande detta återfinns på [officiella webbplatsen](https://papilite.se/).
+Alla som gör *"engångsdonation"* får fler funktioner, bland annat returneras gator grupperade efter postnummer i svarsresultatet, anrop med ofullständiga postnummer, anrop med mindre antal bokstäver för postorter och hämta data baserat på latitud och longitud. Information gällande detta återfinns på [officiella webbplatsen](https://papilite.se/).
 
 ## FAQ
 
@@ -211,7 +186,7 @@ Nyheter, uppdateringar, underhåll och dylikt gällande PAPILITE går att prenum
 
 ## Driftstatus
 
-Målet är att leverera den bästa tjänsten med 100% tillgång utan driftstörningar. 
+Målet är att leverera den bästa tjänsten med 100% tillgänglighet och inga driftstörningar. 
 
 [Driftstatus](https://stats.uptimerobot.com/NxzP7FNVD9) (UptimeRobot)
 
@@ -223,7 +198,7 @@ Distribueras under MIT-licensen. Se `LICENSE` för mer information.
 
 Oavsett vad det gäller angående PAPILITE så finns det olika kontaktvägar, se nedan. Det kan handla om feedback, problem, fel, buggar, idéer eller dylikt. Svar inom 24 timmar, men oftast snabbare än så och donatorer är prioriterade.
 
-[E-post](mailto:lite@papapi.se)
+[E-post](mailto:info@papilite.se)
 
 [Kontaktformulär](https://papilite.se/#kontakt)
 
