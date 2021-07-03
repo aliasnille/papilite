@@ -3,7 +3,7 @@
 # PAP/API Lite
 
 [**PAP/API Lite**](https://papilite.se/) or abbreviated to *PAPILITE* is an open REST API with all of Sweden's postal codes and postal cities. By using this API, the user gets free access to current information for postal codes and postal cities. There are over 16,000 postal codes in Sweden. The number of postal codes is constantly changing. Postal codes are added or dropped every now and then.
-PAPILITE contains not only information about postal codes and postal cities, but also about states, counties and GPS-coordinates for all postal cities.
+PAPILITE contains not only information about postal codes and postal cities, but also about states, counties and GPS-coordinates for all postal codes. Additionally streets for those users who choose to upgrade by a "one-time donation".
 This is a complete API that fulfills its purpose and can be used in many applications. PAPILITE facilitates and helps in processes where current and correct information is crucial.
 
 ## Background
@@ -14,7 +14,9 @@ Behind PAPILITE, but also PAP/API stands full stack-developer [Nille](https://ni
 
 ## Getting Started
 
-PAPILITE is open and free to use. [Registration](https://papilite.se/#registrera) (in Swedish) is required for use and a maximum of 500 request per day is allowed. It's possible to receive up to 5,000 or 10,000 request per day and more possibilities and functions through [donation](https://papilite.se/#priser) (in Swedish). It's only a one-time donation. The limit for free use of PAPILITE is not written in stone. It's possible to have the limit raised with a sufficiently good motivation or similar. Be creative!
+PAPILITE is open and free to use. [Registration](https://papilite.se/#registrera) (in Swedish) is required for use and a maximum of 500 request per day is allowed. It's possible to receive up to 5,000 or 10,000 request per day and more possibilities and functions through [donation](https://papilite.se/#priser) (in Swedish). After a "one-time donation", you are forever upgraded to the selected package. No monthly or annual cost will be added.
+
+*When you registering you accept the following [terms and conditions](https://papilite.se/Anvandarvillkor-for-PAPAPI-Lite.pdf) (in Swedish)*
 
 ## Usage
 
@@ -50,7 +52,7 @@ Retrieving data based on postal city is performed as below.
 
 ### Response
 
-Returned data on a correct request contains *<u>postal code</u>*, *<u>postal city</u>*, *<u>latitude</u>*, *<u>longitude</u>*, *<u>county code</u>*, *<u>county</u>*, *<u>state code</u>*, *<u>state</u>*, *<u>notes</u>* and *<u>updated</u>*.
+Returned data on a correct request contains *<u>postal code</u>*, *<u>postal city</u>*, *<u>latitude</u>*, *<u>longitude</u>*, *<u>county code</u>*, *<u>county</u>*, *<u>state code</u>*, *<u>state</u>*, *<u>streets</u>*, *<u>notes</u>* and *<u>updated</u>*.
 
 #### Response codes
 
@@ -64,6 +66,16 @@ Request will provide the following response codes which are standard HTTP Status
 | 403 — FORBIDDEN    | Limit reached for request per day or blocked API-key |
 | 404 — NOT FOUND    | Correct request without response                     |
 
+#### Daily request quota
+
+By custom HTTP-headers you get an overview of your daily request quota.
+
+| HTTP-headers       | Description                                          |
+| ------------------ | ---------------------------------------------------- |
+| UserDailyLimit     | Maximum number of requests per day                   |
+| UserDailyQuota     | Used requests for the day                            |
+| UserDailyRemaining | Remaining requests for the day                       |
+
 #### Response examples
 
 Response by postal code request contains only one entry, while response by postal city request contain up to 100 entries.
@@ -71,117 +83,82 @@ Response by postal code request contains only one entry, while response by posta
 **JSON**
 
 ```json
-{"api":{"name":"PAP/API Lite","url":"https://papilite.se","version":"X.X","updated":"YYYY-MM-DD HH:MM:SS","encoding":"UTF-8"},"results":[{"postal_code":"10004","city":"Stockholm","latitude":"59.3293235","longitude":"18.0685808","county_code":"0180","county":"Stockholm","state_code":"01","state":"Stockholm","note":"","updated":"YYYY-MM-DD HH:MM:SS"},{"postal_code":"10005","city":"Stockholm","latitude":"59.3293235","longitude":"18.0685808","county_code":"0180","county":"Stockholm","state_code":"01","state":"Stockholm","note":"","updated":"YYYY-MM-DD HH:MM:SS"},{"postal_code":"10012","city":"Stockholm","latitude":"59.3293235","longitude":"18.0685808","county_code":"0180","county":"Stockholm","state_code":"01","state":"Stockholm","note":"","updated":"YYYY-MM-DD HH:MM:SS"} [...]
+{"api":{"name":"PAP/API Lite","url":"https://papilite.se","version":"X.X","updated":"YYYY-MM-DD HH:MM:SS","encoding":"UTF-8"},"results":[{"postal_code":"10004","city":"Stockholm","latitude":"59.3293235","longitude":"18.0685808","county_code":"0180","county":"Stockholm","state_code":"01","state":"Stockholm","streets":["Test"],"note":"","updated":"YYYY-MM-DD HH:MM:SS"},{"postal_code":"10005","city":"Stockholm","latitude":"59.3293235","longitude":"18.0685808","county_code":"0180","county":"Stockholm","state_code":"01","state":"Stockholm","streets":["Leveranspunkt"],"note":"","updated":"YYYY-MM-DD HH:MM:SS"},{"postal_code":"10012","city":"Stockholm","latitude":"59.3293235","longitude":"18.0685808","county_code":"0180","county":"Stockholm","state_code":"01","state":"Stockholm","streets":["Riksdagen"],"note":"","updated":"YYYY-MM-DD HH:MM:SS"} [...]
 ```
 
 **XML**
 
 ```xml
 <results>
-
 	<api>
-
 		<name>PAP/API Lite</name>
-
 		<url>https://papilite.se</url>
-
 		<version>X.X</version>
-
 		<updated>YYYY-MM-DD HH:MM:SS</updated>
-
 		<encoding>UTF-8</encoding>
-
 	</api>
-
 	<result>
-
 		<postal_code>10004</postal_code>
-
 		<city>Stockholm</city>
-
 		<latitude>59.3293235</latitude>    
-
 		<longitude>18.0685808</longitude>	
-
 		<county_code>0180</county_code>
-
 		<county>Stockholm</county>
-
 		<state_code>01</state_code>
-
 		<state>Stockholm</state>
-
+		<streets>
+			<street>Test</street>
+		</streets>		
 		<note></note>
-
 		<updated>YYYY-MM-DD HH:MM:SS</updated>
-
 	</result>
-
 	<result>
-
 		<postal_code>10005</postal_code>
-
 		<city>Stockholm</city>
-
 		<latitude>59.3293235</latitude>
-
 		<longitude>18.0685808</longitude>
-
 		<county_code>0180</county_code>
-
 		<county>Stockholm</county>
-
 		<state_code>01</state_code>
-
 		<state>Stockholm</state>
-
+		<streets>
+			<street>Leveranspunkt</street>
+		</streets>		
 		<note></note>
-
 		<updated>YYYY-MM-DD HH:MM:SS</updated>
-
 	</result>
-
 	<result>
-
 		<postal_code>10012</postal_code>
-
 		<city>Stockholm</city>
-
 		<latitude>59.3293235</latitude>
-
 		<longitude>18.0685808</longitude>
-
 		<county_code>0180</county_code>
-
 		<county>Stockholm</county>
-
 		<state_code>01</state_code>
-
 		<state>Stockholm</state>
-
+		<streets>
+			<street>Riksdagen</street>
+		</streets>		
 		<note></note>
-
 		<updated>YYYY-MM-DD HH:MM:SS</updated>
-
 	</result>
-
 [...]
 ```
 
 **CSV**
 
 ```
-postal_code;city;latitude;longitude;county_code;county;state_code;state;note;updated
-10004;Stockholm;59.3293235;18.0685808;0180;Stockholm;01;Stockholm;;YYYY-MM-DD HH:MM:SS
-10005;Stockholm;59.3293235;18.0685808;0180;Stockholm;01;Stockholm;;YYYY-MM-DD HH:MM:SS
-10012;Stockholm;59.3293235;18.0685808;0180;Stockholm;01;Stockholm;;YYYY-MM-DD HH:MM:SS
+postal_code;city;latitude;longitude;county_code;county;state_code;state;streets;note;updated
+10004;Stockholm;59.3293235;18.0685808;0180;Stockholm;01;Stockholm;Test;;YYYY-MM-DD HH:MM:SS
+10005;Stockholm;59.3293235;18.0685808;0180;Stockholm;01;Stockholm;Leveranspunkt;;YYYY-MM-DD HH:MM:SS
+10012;Stockholm;59.3293235;18.0685808;0180;Stockholm;01;Stockholm;Riksdagen;;YYYY-MM-DD HH:MM:SS
 [...]
 \### PAP/API Lite | https:///docs | v X.X | YYYY-MM-DD HH:MM:SS | UTF-8 ###
 ```
 
 #### For donors
 
-Everyone who makes a one-time donation gets more features, including requests with incomplete postal codes, request with fewer letters for postal cities and retrieving data based on latitude and longitude. Information regarding this can be found on the [official website](https://papilite.se/) (in Swedish).
+Everyone who makes a *"one-time donation"* gets more features, including returned streets grouped by postal code in the response result, requests with incomplete postal codes, request with fewer letters for postal cities and retrieving data based on latitude and longitude. Information regarding this can be found on the [official website](https://papilite.se/) (in Swedish).
 
 ## FAQ
 
@@ -211,7 +188,7 @@ News, updates, maintenance and similar things regarding PAPILITE, please subscri
 
 ## Operating Status
 
-The goal is to deliver the best service with 100% access and without operational disruptions.
+The goal is to deliver the best service with 100% availability and without operational disruptions.
 
 [Operating Status](https://stats.uptimerobot.com/NxzP7FNVD9) (UptimeRobot)
 
@@ -223,7 +200,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 There are different ways to contact us (see below) regarding PAPILITE. This may involve feedback, problems, errors, bugs, ideas or similar. Responses within 24 hours, but usually faster than that and donors are prioritized.
 
-[E-mail](mailto:lite@papapi.se)
+[E-mail](mailto:info@papilite.se)
 
 [Contact Form](https://papilite.se/#kontakt)
 
