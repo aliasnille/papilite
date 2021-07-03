@@ -16,6 +16,8 @@ Bakom PAPILITE precis som PAP/API ligger full stack-utvecklaren [Nille](https://
 
 PAPILITE är öppet och fritt att använda. Det krävs dock [registrering](https://papilite.se/#registrera) för att använda och då är max 500 anrop per dag är tillåtet. Det är möjligt att genom [donation](https://papilite.se/#priser) få upp till 5.000 eller 10.000 anrop per dag och fler möjligheter och funktioner. Det handlar endast om engångsdonation. Efter *"engångsdonation"* är du för alltid uppgraderad till valt paket. Ingen månads- eller årskostnad tillkommer.
 
+*I samband med registrering accepterar du följande [användarvillkor](https://papilite.se/Anvandarvillkor-for-PAPAPI-Lite.pdf).*
+
 ## Användning
 
 ### Anrop
