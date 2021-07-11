@@ -36,9 +36,7 @@ Hämta data baserat på postnummer utförs enligt nedan. Endast fullständiga po
 
 **Exempel på anrop**
 
-```http
-https://api.papapi.se/lite/?query=11434&format=json&apikey=f21a1127be93feae4efc13dbb7bc587627b22114
-```
+`https://api.papapi.se/lite/?query=11434&format=json&apikey=f21a1127be93feae4efc13dbb7bc587627b22114`
 
 #### Postort
 
@@ -54,9 +52,7 @@ Hämta data baserat på postort utförs enligt nedan. Postortens namn kan vara o
 
 **Exempel på anrop**
 
-```http
-https://api.papapi.se/lite/?query=Stockholm&format=json&apikey=f21a1127be93feae4efc13dbb7bc587627b22114
-```
+`https://api.papapi.se/lite/?query=Stockholm&format=json&apikey=f21a1127be93feae4efc13dbb7bc587627b22114`
 
 #### Latitud och longitud *[Endast för donatorer]*
 
@@ -70,9 +66,7 @@ Hämta data baserat på latitud och longitud utförs enligt nedan. Både latitud
 
 **Exempel på anrop**
 
-```http
-https://api.papapi.se/lite/?query=59.329323,18.068581&format=json&apikey=f21a1127be93feae4efc13dbb7bc587627b22114
-```
+`https://api.papapi.se/lite/?query=59.329323,18.068581&format=json&apikey=f21a1127be93feae4efc13dbb7bc587627b22114`
 
 ### Svar
 
@@ -154,17 +148,17 @@ postal_code;city;latitude;longitude;county_code;county;state_code;state;streets;
 
 ## FAQ
 
-- Hur aktuella är uppgifterna som tillhandahålls av tjänsten?
+- **Hur aktuella är uppgifterna som tillhandahålls av tjänsten?**
   *Alla uppgifter uppdateras regelbundet och för att vara mer exakt så sker detta var 14:de dag.*
-- Vilken är källan till uppgifterna?
+- **Vilken är källan till uppgifterna?**
   *Flera tillförlitliga och oberoende register är källan till uppgifterna som tjänsten tillhandahåller. Registerna sammankörs med varandra och eventuella differenser kontrolleras.*
-- Finns det några adressuppgifter?
+- **Finns det några adressuppgifter?**
   *Det beror lite på. Det finns gator eller gatunamn men inga husnummer. Gatorna är grupperade per postnummer. Tillgång till gator är endast för dem som har donerat.*
-- Hur exakta är GPS-koordinaterna?
+- **Hur exakta är GPS-koordinaterna?**
   *Ungefär 70-80 % av GPS-koordinaterna har högre exakthet än resterande. GPS-koordinaterna återspeglar en central position inom området där exempelvis ett postnummer eller postort ligger. Storleken på postnummerområden varierar.*
-- Kan jag få ut alla postnummer och postorter på en och samma gång?
+- **Kan jag få ut alla postnummer och postorter på en och samma gång?**
   *Det finns ingen möjlighet till en "bulk-hämtning" av alla uppgifter. Om det hade varit möjligt hade hela tjänsten som API förlorat sitt syfte.*
-- Vad används donationerna till?
+- **Vad används donationerna till?**
   *Alla pengar från donationer återinvesteras i tjänsten för att göra den ännu bättre. Bra kan bli bättre, och bättre kan bli bäst. Medan andra ord är inte tjänsten vinstdrivande.*
 
 ## Nyheter
