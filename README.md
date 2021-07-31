@@ -31,7 +31,7 @@ Hämta data baserat på postnummer utförs enligt nedan. Endast fullständiga po
 | Parameter | Beskrivning                                                  | Exempel                                                      |
 | --------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | query     | Fullständigt postnummer med fem siffror<br />*[Ofullständiga postnummer med minimum tre siffror]* | *11434*, *[1143]* eller *[114]* (utan mellanslag eller andra tecken) |
-| format    | Format på svaret                                             | *JSON*, *XML* eller *CSV*                                    |
+| format    | Format på svaret                                             | *JSON* eller *XML*                                           |
 | apikey    | API-nyckel som tillhandahålls vid registrering               | *f21a1127be93feae4efc13dbb7bc587627b22114*                   |
 
 **Exempel på anrop**
@@ -47,7 +47,7 @@ Hämta data baserat på postort utförs enligt nedan. Postortens namn kan vara o
 | Parameter | Beskrivning                                                  | Exempel                                    |
 | --------- | ------------------------------------------------------------ | ------------------------------------------ |
 | query     | Fullständig eller ofullständig postort med minst fyra bokstäver<br />*[Ofullständig postort med minimum två bokstäver]* | *Stockholm*, *Stoc* eller *St*             |
-| format    | Format på svaret                                             | *JSON*, *XML* eller *CSV*                  |
+| format    | Format på svaret                                             | *JSON* eller *XML*                         |
 | apikey    | API-nyckel som tillhandahålls vid registrering               | *f21a1127be93feae4efc13dbb7bc587627b22114* |
 
 **Exempel på anrop**
@@ -61,7 +61,7 @@ Hämta data baserat på latitud och longitud utförs enligt nedan. Både latitud
 | Parameter | Beskrivning                                            | Exempel                                    |
 | --------- | ------------------------------------------------------ | ------------------------------------------ |
 | query     | Fullständiga GPS-koordinater, dvs latitud och longitud | *59.329323,18.068581*                      |
-| format    | Format på svaret                                       | *JSON*, *XML* eller *CSV*                  |
+| format    | Format på svaret                                       | *JSON* eller *XML*                         |
 | apikey    | API-nyckel som tillhandahålls vid registrering         | *f21a1127be93feae4efc13dbb7bc587627b22114* |
 
 **Exempel på anrop**
@@ -138,20 +138,12 @@ Svar på anrop för postnummer innehåller endast en post medan svar på anrop f
 </results>
 ```
 
-**CSV**
-
-```
-postal_code;city;latitude;longitude;county_code;county;state_code;state;streets;note;updated
-11434;Stockholm;59.3337496;18.0757887;0180;Stockholm;01;Stockholm;Birger Jarlsgatan,Engelbrektsplan,Ingmar Bergmans Gata,Nybrogatan;;ÅÅÅÅ-MM-DD TT:MM:SS
-### PAP/API Lite | https://papilite.se | v X.X | ÅÅÅÅ-MM-DD TT:MM:SS | UTF-8 ###
-```
-
 ## FAQ
 
 - **Hur aktuella är uppgifterna som tillhandahålls av tjänsten?**
   *Alla uppgifter uppdateras regelbundet och för att vara mer exakt så sker detta var 14:de dag.*
 - **Vilken är källan till uppgifterna?**
-  *Flera tillförlitliga och oberoende register är källan till uppgifterna som tjänsten tillhandahåller. Registerna sammankörs med varandra och eventuella differenser kontrolleras.*
+  *Flera tillförlitliga och oberoende register är källan till uppgifterna som tjänsten tillhandahåller. Registerna samkörs med varandra och eventuella differenser kontrolleras.*
 - **Finns det några adressuppgifter?**
   *Det beror lite på. Det finns gator eller gatunamn men inga husnummer. Gatorna är grupperade per postnummer. Tillgång till gator är endast för dem som har donerat.*
 - **Hur exakta är GPS-koordinaterna?**
